@@ -3,7 +3,7 @@ from flask_restful import Api, Resource
 import requests
 import random
 
-# Function to fetch artworks from the Art Institute of Chicago API
+
 def get_artworks():
     api_url = 'https://api.artic.edu/api/v1/artworks'
     response = requests.get(api_url)
@@ -12,16 +12,14 @@ def get_artworks():
     else:
         return []
 
-# Blueprint and API instance for artworks
+
 artworks_api = Blueprint('artworks_api', __name__, url_prefix='/api/artworks')
 api = Api(artworks_api)
 
-# Resource class for reading artworks
 class ArtworksAPI(Resource):
     def get(self):
         return jsonify(get_artworks())
 
-# Adding the resource to the API
 api.add_resource(ArtworksAPI, '/')
 
 if __name__ == "__main__":
@@ -29,7 +27,6 @@ if __name__ == "__main__":
     url = server + "/api/artworks"
     responses = []
 
-    # Get artworks from the Art Institute of Chicago API
     responses.append(requests.get(url))
 
     for response in responses:
