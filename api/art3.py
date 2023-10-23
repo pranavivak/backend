@@ -7,7 +7,7 @@ api = Api(rijksmuseum_api)
 
 class ArtworkAPI(Resource):
     def get(self, object_id):
-        api_key = "YOUR_RIJKSMUSEUM_API_KEY"
+        api_key = "e09k2J7B"
         base_url = "https://www.rijksmuseum.nl/api/en/collection/"
         url = f"{base_url}{object_id}?key={api_key}"
         
