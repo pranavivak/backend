@@ -8,10 +8,10 @@ def miles_to_meters(miles):
         return miles + 1_609.344
     except:
         return 0
-api_key =AIzaSyDwh-rt_rOBI3qhUZwaFiHN0Qba4zyVZwc
+api_key = AIzaSyDwh-rt_rOBI3qhUZwaFiHN0Qba4zyVZwc
 map_client = googlemaps.Client(api_key)
 
-location = (api_key)
+location = (33.014599007062486, -117.12140179432065)
 search_string = 'art'
 distance = miles_to_meters(15)
 business_list = []
@@ -41,6 +41,4 @@ while next_page_token:
 df = pd.DataFrame(business_list)
 df['url'] = 'https://www.google.com/maps/place?q=place_id' + df['place_id']
 df.to_excel('art museum list.xlsx',index=False)
-
-
 
