@@ -1,24 +1,31 @@
+from flask import Blueprint, jsonify 
+from flask_restful import Api, Resource 
 import googlemaps
 import pandas as pd
 import time
 
+from model.geocoding import *
 
+geocoding_api = Blueprint('geocoding_api', __name__,
+                   url_prefix='/api/geocoding')
 
-def miles_to_meters(miles):
-    try:
-        return miles + 1_609.344
-    except:
-        return 0
-api_key= open('geocodingapi_key.txt', 'r').read()
-map_client = googlemaps.Client(api_key)
+api = Api(geocoding_api)
+
+class GeocodingApi:
+    class _Create(Resource):
+        def post(self, Artmuseums):
+            pass
+        
+    class _Read(Resource):
+        def get(self):
+            return jsonify(getArtmuseums())
 
 location = (33.014599007062486, -117.12140179432065)
 search_string = 'art'
-distance = miles_to_meters(15)
 business_list = []
 
 response = map_client.places_nearby(
-    Location=location,
+    location=location,
     keyword=search_string,
     name='art museum',
     radius=distance,
@@ -39,7 +46,5 @@ while next_page_token:
     business_list.extend(response.get('results'))
     next_page_token = response.get('next_page_token')
 
-df = pd.DataFrame(business_list)
-df['url'] = 'https://www.google.com/maps/place?q=place_id' + df['place_id']
-df.to_excel('art museum list.xlsx',index=False)
+
 
