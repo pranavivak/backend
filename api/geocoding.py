@@ -25,5 +25,5 @@ class GeocodingAPI:
                 fields = ["formatted_address","name","rating","opening_now"],
                 )
             results = response.get('results')
-            return results
-api.add_resource(GeocodingAPI._Read, '/<string:zip_code>')
+            return jsonify (results)
+api.add_resource(GeocodingAPI._Read, '/')

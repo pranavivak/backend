@@ -8,7 +8,7 @@ from __init__ import app,db  # Definitions initialization
 from model.jokes import initJokes
 from model.users import initUsers
 from model.players import initPlayers
-from model.geocoding import searchplace
+from model.geocoding import initGeocoding
 
 
 # setup APIs
@@ -46,7 +46,7 @@ def index():
 def table():
     return render_template("table.html")
 
-@app.before_first_request
+@app.before_request
 def activate_job():  # activate these items 
     initJokes()
     initUsers()
