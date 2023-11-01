@@ -1,50 +1,32 @@
-from flask import Blueprint, jsonify 
-from flask_restful import Api, Resource 
+from flask import Blueprint, jsonify
+from flask_restful import Api, Resource
 import googlemaps
-import pandas as pd
-import time
-
+import requests
+import random
+import json
 from model.geocoding import *
-
 geocoding_api = Blueprint('geocoding_api', __name__,
-                   url_prefix='/api/geocoding')
-
+                           url_prefix='/api/geocoding')
+# API generator
 api = Api(geocoding_api)
-
-class GeocodingApi:
-    class _Create(Resource):
-        def post(self, Artmuseums):
-            pass
-        
+api_key = 'AIzaSyDwh-rt_rOBI3qhUZwaFiHN0Qba4zyVZwc'
+class GeocodingAPI:
     class _Read(Resource):
-        def get(self):
-            return jsonify(getArtmuseums())
-
-location = (33.014599007062486, -117.12140179432065)
-search_string = 'art'
-business_list = []
-
-response = map_client.places_nearby(
-    location=location,
-    keyword=search_string,
-    name='art museum',
-    radius=distance,
-)
-
-business_list.extend(response.get('results'))
-next_page_token = response.get('next_page_token')
-
-while next_page_token:
-    time.sleep(2)
-    response = map_client.places_nearby(
-        Location=location,
-        keyword=search_string,
-        name='art museum',
-        radius=distance,
-        page_taken=next_page_token
-    )
-    business_list.extend(response.get('results'))
-    next_page_token = response.get('next_page_token')
+        def get(zipcode):
+            try:
+                return 'No results found for ' + zipcode
+            except:
+                return 0
+        def post(data):
+            map_client = googlemaps.Client(api_key)
+            search_string = 'art museums near'
+            response = map_client.textsearch(
+                query=search_string,
+                fields = ["formatted_address","name","rating","opening_now"],
+                )
+            results = response.get('results')
+            return results
+api.add_resource(GeocodingAPI._Read, '/<string:zip_code>')
 
 
 
