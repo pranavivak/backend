@@ -4,7 +4,7 @@ services:
                 image: art_port_1
                 build: .
                 ports:
-                        - "8974:8974"
+                        - "8794:8794"
                 volumes:
                         - ./volumes:/volumes
                         - ./instance:/instance
