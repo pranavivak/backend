@@ -8,7 +8,7 @@ from __init__ import app,db  # Definitions initialization
 from model.jokes import initJokes
 from model.users import initUsers
 from model.players import initPlayers
-from model.geocoding import initGeocoding
+#from model.geocoding import initGeocoding
 
 
 # setup APIs
@@ -51,7 +51,7 @@ def activate_job():  # activate these items
     initJokes()
     initUsers()
     initPlayers()
-    initGeocoding()
+    #initGeocoding()
     #input geocoding api
 
 # this runs the application on the development server

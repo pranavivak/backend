@@ -11,6 +11,9 @@ geocoding_api = Blueprint('geocoding_api', __name__,
 api = Api(geocoding_api)
 class GeocodingAPI:
     class _Read(Resource):
-        def get(self):
-            return jsonify(getPlaces(zip))
+       def get(self):
+           zipcode = request.args.get('zipcode')
+           print("zipcode="+zipcode)         
+           return searchMuseums(zipcode)
 api.add_resource(GeocodingAPI._Read, '/')
+
