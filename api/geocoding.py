@@ -1,6 +1,5 @@
 from flask import Blueprint, jsonify
 from flask_restful import Api, Resource
-import googlemaps
 import requests
 import random
 import json

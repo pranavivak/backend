@@ -1,7 +1,7 @@
 from flask import Flask, jsonify, request
 import requests
 import pgeocode
-import googlemaps
+
 
 app = Flask(__name__)
 places_api_url = "https://maps.googleapis.com/maps/api/place/nearbysearch/json"
